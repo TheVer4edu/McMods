@@ -1,6 +1,7 @@
 package com.example.examplemod.registries;
 
 import com.example.examplemod.items.KeyItem;
+import com.example.examplemod.items.SomeItem;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -19,12 +20,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemsRegistry {
 
     @GameRegistry.ObjectHolder("key")
-    public static final Item KEY = null;
+    public static final Item KEY = null;  // мб имеет смысл хранить все айтемы коллекцией?
+    @GameRegistry.ObjectHolder("some_item")
+    public static final Item SOME = null; // или от этого теряется смысл самой концепции?
 
     @SubscribeEvent
     public static void onRegistryItem(RegistryEvent.Register<Item> e) {
         e.getRegistry().registerAll(
-                new KeyItem()
+                new KeyItem(),
+                new SomeItem(3, 1, false)
         );
     }
 
@@ -32,6 +36,7 @@ public class ItemsRegistry {
     @SideOnly(Side.CLIENT)
     public static void onRegistryModel(ModelRegistryEvent e) {
         registryModel(KEY);
+        registryModel(SOME);
     }
 
     @SideOnly(Side.CLIENT)
