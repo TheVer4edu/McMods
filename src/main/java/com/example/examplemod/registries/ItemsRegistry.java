@@ -12,6 +12,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,12 +25,13 @@ public class ItemsRegistry {
     public static final Item KEY = null;  // мб имеет смысл хранить все айтемы коллекцией?
     @GameRegistry.ObjectHolder("some_item")
     public static final Item SOME = null; // или от этого теряется смысл самой концепции?
+    //private static Item some = new SomeItem(3, 1, false);
 
     @SubscribeEvent
     public static void onRegistryItem(RegistryEvent.Register<Item> e) {
         e.getRegistry().registerAll(
-                new KeyItem(),
-                new SomeItem(3, 1, false)
+                new KeyItem()
+        //        new SomeItem(3, 1, false)
         );
     }
 
@@ -60,6 +62,10 @@ public class ItemsRegistry {
     private static void setRender(Item item) {
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher() // не ебу, что это
                 .register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+    }
+
+    public static void register() {
+        //ForgeRegistries.ITEMS.registerAll(some);
     }
 
 }

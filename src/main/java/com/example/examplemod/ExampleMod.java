@@ -25,6 +25,7 @@ public class ExampleMod
         // Преинициализация
         System.out.println("\u001B[32m" + "[Starting Test Mod PRE-INITIALIZATION]" + "\u001B[0m");
         BlockRegistry.register();
+        //ItemsRegistry.register();
     }
 
     @EventHandler
