@@ -32,6 +32,7 @@ public class ExampleMod
     {
         // Инициализация
         System.out.println("\u001B[32m" + "[Starting Test Mod INITIALIZATION]" + "\u001B[0m");
+        ItemsRegistry.registerRender();
     }
 
     @EventHandler

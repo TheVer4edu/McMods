@@ -2,6 +2,7 @@ package com.example.examplemod.registries;
 
 import com.example.examplemod.items.KeyItem;
 import com.example.examplemod.items.SomeItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -35,8 +36,8 @@ public class ItemsRegistry {
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
     public static void onRegistryModel(ModelRegistryEvent e) {
-        registryModel(KEY);
-        registryModel(SOME);
+        //registryModel(KEY);
+        //registryModel(SOME);
     }
 
     @SideOnly(Side.CLIENT)
@@ -45,6 +46,20 @@ public class ItemsRegistry {
         final ModelResourceLocation mrl = new ModelResourceLocation(regName, "inventory");
         ModelBakery.registerItemVariants(item, mrl);
         ModelLoader.setCustomModelResourceLocation(item, 0, mrl);
+    }
+
+    // альтернативный способ регистрации модели через какие-то другие костыли, можно будет перенести на SubscribeEvent
+
+    @SideOnly(Side.CLIENT)
+    public static void registerRender() {
+        setRender(KEY);
+        setRender(SOME);
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void setRender(Item item) {
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher() // не ебу, что это
+                .register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
     }
 
 }
